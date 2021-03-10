@@ -8,8 +8,11 @@
     "start": "next start",
     "eslint": "eslint .",
     "prettify": "prettier --write .",
+    "prettycheck": "prettier --check .",
     "stylelint": "stylelint \"**/*.css\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "tsc",
+    "test": "npm run eslint && npm run stylelint && npm run prettycheck && npm run typecheck"
   },
   "dependencies": {
     "next": "10.0.8",
