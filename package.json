@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "build": "npm run build-next && npm run build-storybook && npm run server",
+    "build": "npm run build-next && npm run build-storybook && npm run build-server",
     "start": "NODE_ENV=production node build/index.js",
     "eslint": "eslint .",
     "prettify": "prettier --write .",
