@@ -1,4 +1,4 @@
-import "./Button.module.css";
+import styles from "./Button.module.css";
 
 export type ButtonProps = {
   primary: boolean;
@@ -7,7 +7,10 @@ export type ButtonProps = {
 
 function Button({ primary, label, ...props }: ButtonProps) {
   return (
-    <button className={`btn ${primary ? "primary" : ""}`} {...props}>
+    <button
+      className={`${styles.btn} ${primary ? styles.primary : ""}`}
+      {...props}
+    >
       {label}
     </button>
   );
