@@ -12,3 +12,4 @@
 
 # production
 /build
+/storybook-static

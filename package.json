@@ -12,7 +12,9 @@
     "stylelint": "stylelint \"**/*.css\"",
     "prepare": "husky install",
     "typecheck": "tsc",
-    "test": "npm run eslint && npm run stylelint && npm run prettycheck && npm run typecheck"
+    "test": "npm run eslint && npm run stylelint && npm run prettycheck && npm run typecheck",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "next": "10.0.8",
@@ -20,10 +22,16 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@types/node": "^14.14.33",
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.22.0",
