@@ -8,7 +8,11 @@
     "start": "next start",
     "eslint": "eslint .",
     "prettify": "prettier --write .",
-    "stylelint": "stylelint \"**/*.css\""
+    "prettycheck": "prettier --check .",
+    "stylelint": "stylelint \"**/*.css\"",
+    "prepare": "husky install",
+    "typecheck": "tsc",
+    "test": "npm run eslint && npm run stylelint && npm run prettycheck && npm run typecheck"
   },
   "dependencies": {
     "next": "10.0.8",
@@ -23,6 +27,8 @@
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.22.0",
+    "husky": "^5.1.3",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "stylelint": "^13.12.0",
     "stylelint-config-prettier": "^8.0.2",
