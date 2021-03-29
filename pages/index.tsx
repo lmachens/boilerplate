@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import useDebounce from "../hooks/useDebounce";
+import { useState } from "react";
+import SearchInput from "../components/search-input/SearchInput";
 import styles from "../styles/Home.module.css";
 import { searchStudents } from "../utils/api";
 
@@ -11,19 +11,12 @@ interface Student {
 }
 
 export default function Home() {
-  const [search, setSearch] = useState<string>("");
-  const debounceSearch = useDebounce<string>(search, 300);
   const [students, setStudents] = useState<Student[]>(null);
 
-  useEffect(() => {
-    if (!debounceSearch) {
-      return;
-    }
-    (async () => {
-      const newStudents = await searchStudents(debounceSearch);
-      setStudents(newStudents);
-    })();
-  }, [debounceSearch]);
+  async function handleSearch(search: string) {
+    const newStudents = await searchStudents(search);
+    setStudents(newStudents);
+  }
 
   return (
     <div className={styles.container}>
@@ -33,15 +26,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <label>
-          Search
-          <input
-            type="text"
-            placeholder="First or last name"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </label>
+        <SearchInput onSearch={handleSearch} />
         <ul>
           {students?.map((student) => (
             <li key={student._id}>
