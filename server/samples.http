@@ -1,0 +1,14 @@
+### GET all students
+GET http://localhost:3000/api/students
+
+### GET all students with `chris` in name
+GET http://localhost:3000/api/students?search=chris
+
+### GET all students with `chris` in name
+GET http://localhost:3000/api/students?search=stoph
+
+### GET all students with `chris` in name
+GET http://localhost:3000/api/students?search=cel
+
+### GET all students with `chris` in name
+GET http://localhost:3000/api/students?search=e
