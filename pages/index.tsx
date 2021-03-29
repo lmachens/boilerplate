@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import useDebounce from "../hooks/useDebounce";
 import styles from "../styles/Home.module.css";
 import { searchStudents } from "../utils/api";
 
@@ -11,21 +12,18 @@ interface Student {
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
+  const debounceSearch = useDebounce<string>(search, 300);
   const [students, setStudents] = useState<Student[]>(null);
 
   useEffect(() => {
-    if (!search) {
+    if (!debounceSearch) {
       return;
     }
-    const timeoutId = setTimeout(async () => {
-      const newStudents = await searchStudents(search);
+    (async () => {
+      const newStudents = await searchStudents(debounceSearch);
       setStudents(newStudents);
-    }, 300);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [search]);
+    })();
+  }, [debounceSearch]);
 
   return (
     <div className={styles.container}>
