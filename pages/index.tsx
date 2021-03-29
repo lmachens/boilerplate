@@ -1,14 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
 import SearchInput from "../components/search-input/SearchInput";
+import StudentList from "../components/student-list/StudentList";
 import styles from "../styles/Home.module.css";
-import { searchStudents } from "../utils/api";
-
-interface Student {
-  _id: string;
-  firstName: string;
-  lastName: string;
-}
+import { searchStudents, Student } from "../utils/api";
 
 export default function Home() {
   const [students, setStudents] = useState<Student[]>(null);
@@ -27,13 +22,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <SearchInput onSearch={handleSearch} />
-        <ul>
-          {students?.map((student) => (
-            <li key={student._id}>
-              {student.firstName} {student.lastName}
-            </li>
-          ))}
-        </ul>
+        <StudentList students={students} />
       </main>
     </div>
   );
