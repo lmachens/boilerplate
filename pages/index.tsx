@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import { searchStudents } from "../utils/api";
 
 interface Student {
   _id: string;
@@ -16,11 +17,9 @@ export default function Home() {
     if (!search) {
       return;
     }
-    const timeoutId = setTimeout(() => {
-      const url = `/api/students?search=${search}`;
-      fetch(url)
-        .then((response) => response.json())
-        .then((students) => setStudents(students));
+    const timeoutId = setTimeout(async () => {
+      const newStudents = await searchStudents(search);
+      setStudents(newStudents);
     }, 300);
 
     return () => {
@@ -37,7 +36,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <label>
-          Search{" "}
+          Search
           <input
             type="text"
             placeholder="First or last name"
