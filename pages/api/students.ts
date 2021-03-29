@@ -5,7 +5,11 @@ import { withDatabase } from "../../server/utils";
 
 export default withDatabase(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const students = await findStudents();
+    const { search } = req.query;
+    if (Array.isArray(search)) {
+      return res.status(400).end();
+    }
+    const students = await findStudents(search);
     res.status(200).json(students);
   }
 );
