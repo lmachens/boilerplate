@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./Button.module.css";
 
 export type ButtonProps = {
@@ -6,12 +7,15 @@ export type ButtonProps = {
 };
 
 function Button({ primary, label, ...props }: ButtonProps) {
+  const [value, setValue] = useState(label);
+
   return (
     <button
       className={`${styles.btn} ${primary ? styles.primary : ""}`}
+      onClick={() => setValue("clicked")}
       {...props}
     >
-      {label}
+      {value}
     </button>
   );
 }
