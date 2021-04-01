@@ -13,6 +13,7 @@
     "prepare": "husky install",
     "typecheck": "tsc",
     "jest": "jest",
+    "jest-watch": "jest --watch",
     "test": "npm run jest && npm run eslint && npm run stylelint && npm run prettycheck && npm run typecheck",
     "storybook": "start-storybook -s public -p 6006",
     "build-next": "next build",
