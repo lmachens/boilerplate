@@ -3,6 +3,8 @@ import { parse } from "url";
 import next from "next";
 import path from "path";
 import fs from "fs/promises";
+import { broadcastMessage, initializeWebPush } from "./subscriptions";
+import { connect } from "./db";
 
 const dev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 3000;
@@ -17,7 +19,13 @@ const readStorybookStatic = (filename) => {
   return fs.readFile(fileLoc);
 };
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
+  await connect(process.env.MONGODB_URI);
+  initializeWebPush(
+    process.env.VAPID_SUBJECT,
+    process.env.VAPID_PUBLIC_KEY,
+    process.env.VAPID_PRIVATE_KEY
+  );
   createServer(async (req, res) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
     // This tells it to parse the query portion of the URL.
@@ -47,5 +55,12 @@ app.prepare().then(() => {
     handle(req, res, parsedUrl);
   }).listen(port, () => {
     console.log(`> Ready on http://localhost:${port}`);
+
+    // Test broadcast
+    setInterval(async () => {
+      const message = `${Date.now()}ms since 1970/1/1`;
+      const receiversCount = await broadcastMessage(message);
+      console.log(`Send test broadcast to ${receiversCount}`);
+    }, 10000);
   });
 });
