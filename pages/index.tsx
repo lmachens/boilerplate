@@ -1,8 +1,9 @@
 import Head from "next/head";
-import Button from "../components/button/Button";
+import useSubscription from "../hooks/useSubscription";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const [subscription, subscribe] = useSubscription();
   return (
     <div className={styles.container}>
       <Head>
@@ -10,8 +11,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Button primary label="Primary" />
-        <Button primary={false} label="Secondary" />
+        <span>{subscription ? "subscribed" : "notSubscribed"}</span>
+        <button onClick={subscribe}>subscribe</button>
       </main>
     </div>
   );
